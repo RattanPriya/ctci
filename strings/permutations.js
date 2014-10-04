@@ -2,7 +2,7 @@ function printPermutations(str) {
     
     permute("",str);
 }
-function permute(prefix,str) {debugger;
+function permute(prefix,str) {
     var n = str.length,i;
     if(n===0) {
         console.log(prefix);
