@@ -30,7 +30,6 @@ function List() {
     },
 
     this.delete = function(index) {
-        debugger;
         var currNode = this.start;
         var currIndex = 0;
         var length = this.length();
