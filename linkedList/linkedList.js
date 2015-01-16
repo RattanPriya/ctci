@@ -1,74 +1,71 @@
-function List() {
-    this.start = null,
-    this.end = null;
-
-    this.makeNode = function() {
-        return {
-            data: null,
-            next: null
-        };
-    }
-    this.add = function(data) {
-        if (this.start === null) {
-            this.start = this.makeNode();
-            this.start.data = data;
-            this.end = this.start;
-        } else {
-            this.end.next = this.makeNode();
-            this.end.next.data = data;
-            this.end = this.end.next;
-        }
-    },
-    this.length = function() {
-        var currNode = this.start;
-        var len = 0;
-        while (currNode.next) {
-            currNode = currNode.next;
-            len++;
-        }
-        return len+1;
-    },
-
-    this.delete = function(index) {
-        var currNode = this.start;
-        var currIndex = 0;
-        var length = this.length();
-        currNode = this.start;
-        if (index === 0) {
-            currNode.data = null;
-            this.start = currNode.next;
-            return;
-        }
-        else if(index-1 === length-1) {
-            while(currNode.next.next) {
-                currNode = currNode.next;
-            }
-            currNode.next.data = null;
-            this.end = currNode;
-            return;
-        }
-
-        currNode = currNode.next;
-
-        for (i = 1; i < length; i++) {
-            if (index-1 === i+1) {
-                currNode.next.data = null;
-                currNode.next = currNode.next.next;
-                return;
-            }
-            else {
-                currNode = currNode.next;
-            }
-        }
-
-    }
-};
-
-var list = new List();
-for (var i = 1; i <= 10; i++) {
-    list.add(i);
-
+function Node(data) {
+  this.data = data;
+  this.next =  null;
 }
 
+function List(beginningNode) {
+  this.start = beginningNode || null;
+  this.end = this.start;
+  this.length = beginningNode ? 1 : 0;
+}
 
-list.delete(1);
+List.prototype = {
+  add: function add(node) {
+    if (node)  {
+      this.length++;
+      if (this.start === null) {
+        this.start = node;
+        this.end = node;
+      } else {
+        this.end.next = node;
+        this.end = node;
+      }
+    }
+  },
+
+  remove: function remove(index) {
+    if (this.length > 0 && index <= this.length-1) {
+      var prev = this.start;
+      this.length--;
+      if (index === 0) {
+        this.start = this.start.next;
+      } else {
+        while (--index) {
+          prev = prev.next;
+        }
+        prev.next = prev.next.next;
+      }
+    }
+  },
+
+  print: function print() {
+    var currentNode = this.start;
+    var result = [];
+    while (currentNode) {
+      result.push(currentNode.data);
+      currentNode = currentNode.next;
+    }
+    return '[' + result.join(',') + ']';
+  }
+};
+
+var firstNode = new Node(1);
+var secondNode = new Node(2);
+var thirdNode = new Node(3);
+var list = new List(firstNode);
+list.add(secondNode);
+list.add(thirdNode);
+
+function assert(actual, desired) {
+    if ( actual === desired ) {
+        console.log("SUCCESS");
+    } else {
+        console.log("FAILURE");
+    }
+}
+
+assert(list.print(),'[1,2,3]');
+list.remove(0);
+assert(list.print(),'[2,3]');
+list.remove(1);
+assert(list.print(),'[2]');
