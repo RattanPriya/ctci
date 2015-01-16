@@ -1,6 +1,6 @@
 function Node(data) {
   this.data = data;
-  this.next =  null;
+  this.next = null;
 }
 
 function List(beginningNode) {
@@ -25,11 +25,11 @@ List.prototype = {
 
   remove: function remove(index) {
     if (this.length > 0 && index <= this.length-1) {
-      var prev = this.start;
       this.length--;
       if (index === 0) {
         this.start = this.start.next;
       } else {
+        var prev = this.start;
         while (--index) {
           prev = prev.next;
         }
@@ -38,17 +38,34 @@ List.prototype = {
     }
   },
 
-  print: function print() {
+  arrayify: function arrayify() {
     var currentNode = this.start;
     var result = [];
     while (currentNode) {
       result.push(currentNode.data);
       currentNode = currentNode.next;
     }
-    return '[' + result.join(',') + ']';
+    return result;
   }
 };
 
+function Tester() {};
+
+Tester.prototype = {
+  assertArrayEquality: function assertArrayEquality(actual, desired) {
+      var len  = actual.length;
+      while(len--) {
+        if (actual[len] !== desired[len]) {
+          console.log("FAILURE");
+          return;
+        }
+      }
+      console.log("SUCCESS");
+  }
+}
+
+// Link List Creation
+var tester = new Tester();
 var firstNode = new Node(1);
 var secondNode = new Node(2);
 var thirdNode = new Node(3);
@@ -56,16 +73,9 @@ var list = new List(firstNode);
 list.add(secondNode);
 list.add(thirdNode);
 
-function assert(actual, desired) {
-    if ( actual === desired ) {
-        console.log("SUCCESS");
-    } else {
-        console.log("FAILURE");
-    }
-}
-
-assert(list.print(),'[1,2,3]');
+// Tests
+tester.assertArrayEquality(list.arrayify(),[1,2,3]);
 list.remove(0);
-assert(list.print(),'[2,3]');
+tester.assertArrayEquality(list.arrayify(),[2,3]);
 list.remove(1);
-assert(list.print(),'[2]');
+tester.assertArrayEquality(list.arrayify(),[2]);
