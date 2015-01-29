@@ -27,7 +27,12 @@ List.prototype = {
     if (this.length > 0 && index <= this.length-1) {
       this.length--;
       if (index === 0) {
-        this.start = this.start.next;
+        if(!this.start.next) {
+          this.start = null;
+          this.end = null;
+        } else {
+          this.start = this.start.next; 
+        }
       } else {
         var prev = this.start;
         while (--index) {
@@ -36,6 +41,21 @@ List.prototype = {
         prev.next = prev.next.next;
       }
     }
+  },
+
+  reverse: function reverse() {
+    var curr = this.start,
+        save = curr.next,
+        prev = null;
+        
+    while(curr.next) {
+      save = curr.next;
+      curr.next = prev;
+      prev = curr;
+      curr = save;
+    }
+    curr.next = prev;
+    this.start = curr;
   },
 
   arrayify: function arrayify() {
@@ -47,6 +67,7 @@ List.prototype = {
     }
     return result;
   }
+
 };
 
 function Tester() {};
@@ -73,9 +94,16 @@ var list = new List(firstNode);
 list.add(secondNode);
 list.add(thirdNode);
 
+list.reverse();
+tester.assertArrayEquality(list.arrayify(),[3,2,1])
+list.reverse();
+
 // Tests
 tester.assertArrayEquality(list.arrayify(),[1,2,3]);
 list.remove(0);
 tester.assertArrayEquality(list.arrayify(),[2,3]);
 list.remove(1);
 tester.assertArrayEquality(list.arrayify(),[2]);
+
+//reverse tests
+
