@@ -43,6 +43,19 @@ List.prototype = {
     }
   },
 
+//recursive
+  reverseRecursive: function reverseRecursive(curr, prev) {
+    var save ;
+        
+    if(!curr) { 
+      this.start = prev;
+      return;
+    } 
+    this.reverseRecursive(curr.next, curr);
+    curr.next = prev;
+  },  
+
+//iterative
   reverse: function reverse() {
     var curr = this.start,
         save = curr.next,
@@ -50,12 +63,45 @@ List.prototype = {
         
     while(curr.next) {
       save = curr.next;
-      curr.next = prev;
       prev = curr;
       curr = save;
     }
     curr.next = prev;
     this.start = curr;
+  },
+
+  //detect a loop in a LL
+  detectLoop: function detectLoop() {
+    var slowPointer = this.start,
+      fastPointer = this.start;
+    while (slowPointer && fastPointer && fastPointer.next) {
+      slowPointer = slowPointer.next;
+      fastPointer = fastPointer.next.next;
+      if (slowPointer === fastPointer) {
+        return true;
+      }
+    }
+    return false;
+
+  },
+
+  //rotate LL by K nodes
+  rotateLL: function rotateLL(k) {
+    var curr = this.start,
+      prev = this.curr,
+      head = this.start;
+    i = 1;
+    while (curr.next) {
+      if (i === k + 1) {
+        this.start = curr;
+        prev.next = null;
+      }
+      prev = curr;
+      curr = curr.next;
+      i++;
+    }
+    curr.next = head;
+
   },
 
   arrayify: function arrayify() {
@@ -90,10 +136,15 @@ var tester = new Tester();
 var firstNode = new Node(1);
 var secondNode = new Node(2);
 var thirdNode = new Node(3);
+var fourthNode = new Node(4);
+var fifthNode = new Node(5);
 var list = new List(firstNode);
+
 list.add(secondNode);
 list.add(thirdNode);
-
+list.add(fourthNode);
+list.add(fifthNode);
+/*
 list.reverse();
 tester.assertArrayEquality(list.arrayify(),[3,2,1])
 list.reverse();
@@ -106,4 +157,6 @@ list.remove(1);
 tester.assertArrayEquality(list.arrayify(),[2]);
 
 //reverse tests
+
+*/
 
