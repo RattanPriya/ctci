@@ -103,6 +103,12 @@ List.prototype = {
     curr.next = head;
 
   },
+  ///TODO: Complex LL questions
+  ///1. Merge two unsorted linked list
+  ///2. Intersection of two linked list
+  ///3. Sort Linked List
+  ///4. Remove duplicates from unsorted LL
+  ///5. Binary tree to doubly linked list
 
   arrayify: function arrayify() {
     var currentNode = this.start;
