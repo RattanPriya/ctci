@@ -1,35 +1,28 @@
-//O(N) asymptotic cost for push and pop methods 
-//
+//push and pop takes O(1) however storing next pointers adds space overheads
 
-function Stack() {
-	this.top = 0;
-	this.s = [];
-};
-
+function Node(data) {
+	this.data = data;
+	this.next = null;
+}
+var Stack = function() {
+	this.top = null;
+}
 Stack.prototype = {
+	pop: function pop() {
+		var n = this.top;
+		this.top = this.top.next;
+		return n.data;
+	},
+	push: function push(data) {
+		var n = new Node(data);
+		n.next = this.top;
+		this.top = n;
+	},
 
-	push: function(data) {
-		var s = this.s;
-		if (s) {
-			s[this.top++] = data;
-		}
-	},
-	pop: function() {
-		var s = this.s;
-		if (s && s.length >= 0) {
-			item = s[this.top--];
-			return item;
-		}
-	},
-	seek: function() {
-		var s = this.s;
-		var t = this. top;
-		if (s && s.length > 0) {
-			return s[this.top - 1];
-		}
+	seek: function seek() {
+		return this.top.data;
 	}
 }
-
 var Tester = function() {};
 	Tester.prototype = {
 		test: function test(actual, desired) {
@@ -40,6 +33,7 @@ var Tester = function() {};
 			}
 		}
 	}
+
 var t = new Tester();
 var stack = new Stack();
 
