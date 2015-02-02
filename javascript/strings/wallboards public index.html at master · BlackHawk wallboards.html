@@ -1,0 +1,25 @@
+function findSum(str){ 
+ var sum =0, regEx = /[0-9]/;
+ for( i=0;i<str.length; i++) {
+ 	var num = 0; var isNeg
+ 	if(regEx.test(str.chartAt(i))) {
+ 	 	var j = i+1;
+ 	 	if(str.charAt(i-1) && str.chartAt(i-1) === "-") {
+ 	 		isNeg = true;
+ 	 	}
+ 	 	while(regEx.test(str.charAt(j)) && j < str.length) {
+ 	 		num = num * 10 + parseInt(str.chart(j));
+ 	 		j++;
+
+ 	 	}
+ 	 	if(isNeg) {
+ 	 		num = -num;
+ 	 	}
+ 	}
+ 	else if(num !=0) {
+ 		sum +=num;
+ 		i = j;
+ 	}
+ }
+ 	return sum;
+}

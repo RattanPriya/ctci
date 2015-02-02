@@ -1,0 +1,18 @@
+//Using css please align 3 divs that are 50px wide so they are equal distances
+//apart from each other within a container of 550px;
+
+
+<class="container">
+    <div class="box">1</div>
+    <div class="box">2</div>
+    <div class="box">3</div>
+</div>
+.container{
+
+}
+.box{
+    border:solid;
+    width:50px;    
+    float:left
+    margin-left:100px;
+}
