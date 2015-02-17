@@ -1,8 +1,4 @@
-(n^2) Solution
- *
- * We observe that a palindrome mirrors around its center.
- * Therefore, a palindrome can be expanded from its center, and there are only 2N-1 such centers.
- */
+(n ^ 2) Solution * * We observe that a palindrome mirrors around its center.*Therefore, a palindrome can be expanded from its center, and there are only 2N - 1 such centers.*/
 (function () {
     var expandAroundCenter = function expandAroundCenter(s, c1, c2) {
         var l = c1,
@@ -21,25 +17,23 @@
             return '';
         }
 
-        var longest = s[0];  // a single char itself is a palindrome
-        for (var i = 0; i < n - 1; i++) {
-            var p1 = expandAroundCenter(s, i, i);
-            if (p1.length > longest.length) {
-                longest = p1;
-            }
+        var longest = s[0];  / / a single char itself is a palindrome
+for (var i = 0; i < n - 1; i++) {
+    var p1 = expandAroundCenter(s, i, i);
+    if (p1.length > longest.length) {
+        longest = p1;
+    }
 
 
-            var p2 = expandAroundCenter(s, i, i + 1);
-            if (p2.length > longest.length) {
-                longest = p2;
-            }
+    var p2 = expandAroundCenter(s, i, i + 1);
+    if (p2.length > longest.length) {
+        longest = p2;
+    }
 
-        }
-        return longest;
-    };
+}
+return longest;
+};
 
-    longestPalindromeSimple('bananad'); // => anana
-    
+longestPalindromeSimple('bananad'); // => anana
+
 })();
-
-
