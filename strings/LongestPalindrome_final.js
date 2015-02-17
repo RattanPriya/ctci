@@ -1,4 +1,4 @@
-(n ^ 2) Solution * * We observe that a palindrome mirrors around its center.*Therefore, a palindrome can be expanded from its center, and there are only 2N - 1 such centers.*/
+//(n ^ 2) Solution 
 (function () {
     var expandAroundCenter = function expandAroundCenter(s, c1, c2) {
         var l = c1,
