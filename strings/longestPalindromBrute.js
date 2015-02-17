@@ -1,5 +1,4 @@
-n findLongstPal(str) {
-    debugger;
+findLongstPalindrome(str) {
     var n = str.length,
         i, j,
         substr, isPalin, maxLen = 0,
@@ -34,4 +33,4 @@ function isPalindrome(substr) {
     }
     return true;
 }
-findLongstPal('affaptbbcracecarf');
+findLongstPalindrome('affaptbbcracecarf');
