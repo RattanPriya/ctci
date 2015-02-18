@@ -1,33 +1,33 @@
 //(n ^ 2) Solution 
 (function () {
-    var expandAroundCenter = function expandAroundCenter(s, c1, c2) {
-        var l = c1,
-            r = c2,
-            n = s.length;
-        while (l >= 0 && r <= n - 1 && s[l] == s[r]) {
-            l--;
-            r++;
+    var expandAroundCenter = function expandAroundCenter(str, lIndex, rIndex) {
+        var leftIndex = lIndex,
+            rightIndex = rIndex,
+            len = str.length;
+        while (leftIndex >= 0 && rightIndex <= len - 1 && str[leftIndex] == str[rightIndex]) {
+            leftIndex--;
+            rightIndex++;
         }
-        return s.substr(l + 1, r - l - 1);
+        return str.substr(leftIndex + 1, rightIndex - leftIndex - 1);
     };
 
-    var longestPalindromeSimple = function longestPalindromeSimple(s) {
-        var n = s.length;
-        if (n == 0) {
+    var longestPalindromeSimple = function longestPalindromeSimple(str) {
+        var len = str.length;
+        if (len == 0) {
             return '';
         }
 
-        var longest = s[0];  / / a single char itself is a palindrome
-for (var i = 0; i < n - 1; i++) {
-    var p1 = expandAroundCenter(s, i, i);
-    if (p1.length > longest.length) {
-        longest = p1;
+        var longest = str[0];  / / a single char itself is a palindrome
+for (var i = 0; i < len - 1; i++) {
+    var singleCharPalindrome = expandAroundCenter(s, i, i);
+    if (singleCharPalindrome.length > longest.length) {
+        longest = singleCharPalindrome;
     }
 
 
-    var p2 = expandAroundCenter(s, i, i + 1);
-    if (p2.length > longest.length) {
-        longest = p2;
+    var strPalindromeFromNextChar = expandAroundCenter(str, i, i + 1);
+    if (strPalindromeFromNextChar.length > longest.length) {
+        longest = strPalindromeFromNextChar;
     }
 
 }
