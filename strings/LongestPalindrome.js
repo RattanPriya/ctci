@@ -12,12 +12,12 @@
     };
 
     var longestPalindromeSimple = function longestPalindromeSimple(str) {
-        var len = str.length;
+        var len = str.length, longest;
         if (len == 0) {
             return '';
         }
 
-        var longest = str[0];  / / a single char itself is a palindrome
+        longest = str[0];  / / a single char itself is a palindrome
 for (var i = 0; i < len - 1; i++) {
     var singleCharPalindrome = expandAroundCenter(s, i, i);
     if (singleCharPalindrome.length > longest.length) {
