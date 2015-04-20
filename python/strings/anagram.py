@@ -16,3 +16,4 @@ def bucketizeAnagrams(input):
 if __name__ == '__main__':
 	input =  ["star", "rats", "car", "arc", "arts", "stars"] 
 	print bucketizeAnagrams(input)
+
