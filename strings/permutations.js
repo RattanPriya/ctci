@@ -9,7 +9,7 @@ function permute(prefix,str) {
     }
     else {
         for(i=0;i<str.length;i++) {
-            permute(prefix+str.charAt(i),     str.substring(0,i)+str.substring(i+1,n));
+            permute(prefix+str.charAt(i), str.substring(0,i)+str.substring(i+1,n));
         }
     }
 }
